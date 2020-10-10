@@ -38,9 +38,9 @@ pipeline {
                 }
             }
         }
-        stage('DeployToProduction') {
+        stage('SkipDeployToProduction') {
             when {
-                branch 'example-solution'
+                branch 'non-example-solution'
             }
             steps {
                 input 'Deploy to Production?'
@@ -50,6 +50,17 @@ pipeline {
                     configs: 'train-schedule-kube.yml',
                     enableConfigSubstitution: true
                 )
+            }
+        }
+        stage('DeployToProduction') {
+            when { 
+                branch 'example-solution'
+            }
+            steps {
+                script{
+                   #def image_id = registry + ":$BUILD_NUMBER"
+                   sh "/usr/local/bin/kubectl apply -f train-schedule-kube.yml.yml"
+               }
             }
         }
     }
