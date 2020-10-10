@@ -58,7 +58,7 @@ pipeline {
             }
             steps {
                 script{
-                   #def image_id = registry + ":$BUILD_NUMBER"
+                   //def image_id = registry + ":$BUILD_NUMBER"
                    sh "/usr/local/bin/kubectl apply -f train-schedule-kube.yml.yml"
                }
             }
