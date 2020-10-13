@@ -40,7 +40,7 @@ pipeline {
         }
         stage('DeployToProduction') {
             agent {
-                k8s
+                label 'k8s'
             }
             when {
                 branch 'example-solution'
