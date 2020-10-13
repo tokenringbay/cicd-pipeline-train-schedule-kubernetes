@@ -39,6 +39,9 @@ pipeline {
             }
         }
         stage('DeployToProduction') {
+            agent {
+                k8s
+            }
             when {
                 branch 'example-solution'
             }
